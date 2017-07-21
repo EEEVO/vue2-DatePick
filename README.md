@@ -5,7 +5,7 @@
 ## Requirements
 
 * [Vue.js](https://github.com/yyx990803/vue)  2.0.0
-* [SCSS](https://github.com/sass/sass)
+* [Scss](https://github.com/sass/sass)
 * [ES6](https://github.com/bevacqua/es6)
 
 ## Usage
