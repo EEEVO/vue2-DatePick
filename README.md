@@ -212,89 +212,85 @@ export default {
 
 <style lang="scss" scoped>
 .main {
-  background: rgba(0, 0, 0, .4);
-  border-color: rgba(0, 0, 0, .2);
+  background: rgba(0, 0, 0, 0.4);
+  border-color: rgba(0, 0, 0, 0.2);
   width: 260px;
   padding: 2px;
   line-height: 18px;
-  >.header {
-    position: relative;
-    border: 0;
-    font-weight: 700;
-    width: 100%;
-    padding: 4px 0;
-    color: #676767;
-    border-bottom: 1px solid rgba(0, 0, 0, .6);
-    >.btn-block {
-      display: inline-block;
-      width: auto;
-      >.dateBtn {
-        color: #fff;
-        text-decoration: none;
-        vertical-align: top;
-        cursor: pointer;
-        text-align: center;
-        margin-top: 2px;
-        padding: 6px 10px;
-        width: 14px;
-        height: 14px;
-        &:hover {
-          color: #FF9600!important;
-        }
-      }
-    }
-    >.date-block {
-      text-align: center;
-      padding: 0;
-      >span {
-        font-size: 16px;
-        vertical-align: top;
-        >b:hover {
-          cursor: pointer;
-          color: #fff!important;
-          background-color: rgba(255, 255, 225, .15);
-        }
-      }
-    }
-  }
-  >.dateContent {
-    width: 100%;
-    >.weekContent {
-      width: 100%; // display: flex;
-    }
-    >.date-list {
-      font-size: 0;
-      >.nowMonth {
-        &:hover {
-          border-radius: 50%;
-        }
-        &.active,
-        &:hover {
-          background-color: rgba(255, 255, 255, .35);
-          border-color: rgba(0, 0, 0, .1)rgba(0, 0, 0, .1)rgba(0, 0, 0, .25);
-          cursor: pointer;
-        }
-      }
-      >.lastMonth,
-      >.nextMonth {
-        color: #54686B;
-      }
-    }
-    span {
-      display: inline-block;
-      width: 36px;
-      height: 36px;
-      text-align: center;
-      line-height: 36px;
-      font-size: 14px;
-    }
-  }
 }
-
+.main .header {
+  position: relative;
+  border: 0;
+  font-weight: 700;
+  width: 100%;
+  padding: 4px 0;
+  color: #676767;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.6);
+}
+.main .header .btn-block {
+  display: inline-block;
+  width: auto;
+}
+.main .header .btn-block .dateBtn {
+  color: #fff;
+  text-decoration: none;
+  vertical-align: top;
+  cursor: pointer;
+  text-align: center;
+  margin-top: 2px;
+  padding: 6px 10px;
+  width: 14px;
+  height: 14px;
+}
+.main .header .btn-block .dateBtn:hover {
+  color: #FF9600 !important;
+}
+.main .header .date-block {
+  text-align: center;
+  padding: 0;
+}
+.main .header .date-block span {
+  font-size: 16px;
+  vertical-align: top;
+}
+.main .header .date-block span b:hover {
+  cursor: pointer;
+  color: #fff !important;
+  background-color: rgba(255, 255, 225, 0.15);
+}
+.main .dateContent {
+  width: 100%;
+}
+.main .dateContent .weekContent {
+  width: 100%;
+}
+.main .dateContent .date-list {
+  font-size: 0;
+}
+.main .dateContent .date-list .nowMonth:hover {
+  border-radius: 50%;
+}
+.main .dateContent .date-list .nowMonth.active,
+.main .dateContent .date-list .nowMonth:hover {
+  background-color: rgba(255, 255, 255, 0.35);
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+.main .dateContent .date-list .lastMonth,
+.main .dateContent .date-list .nextMonth {
+  color: #54686B;
+}
+.main .dateContent span {
+  display: inline-block;
+  width: 36px;
+  height: 36px;
+  text-align: center;
+  line-height: 36px;
+  font-size: 14px;
+}
 .left {
   float: left;
 }
-
 .right {
   float: right;
 }
