@@ -1,4 +1,4 @@
-# vue2-DataPick
+# vue2-DatePick
 
 因公司业务需要抽分出来,以后慢慢自己完善
 
