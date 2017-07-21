@@ -27,6 +27,9 @@ export default {
     getDate(date) {
       console.log(date);
     }
+  },
+  components: {
+    Vue2DataPicker
   }
 }
 </script>
