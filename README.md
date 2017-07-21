@@ -10,7 +10,7 @@
 
 ## Usage
 
-![例子样式]https://github.com/HeavenZhangHr/vue2-DataPick/blob/master/img.png
+![例子样式](https://github.com/HeavenZhangHr/vue2-DataPick/blob/master/img.png)
 
 ``` bash
 
@@ -30,6 +30,9 @@ export default {
   }
 }
 </script>
+
+<style>
+</style>
 ```
 
 ## demo
