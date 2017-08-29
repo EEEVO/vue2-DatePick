@@ -47,13 +47,13 @@ export default {
     <div class="header">
       <!-- 向左翻页 -->
       <div class="btn-block left">
-        <span class="dateBtn" @click="reduceYear()">&laquo;</span>
-        <span class="dateBtn" @click="reduceMonth()">&lt;</span>
+        <span class="dateBtn" @click="reduceYear()"><<</span>
+        <span class="dateBtn" @click="reduceMonth()"><</span>
       </div>
       <!-- 向右翻页 -->
       <div class="btn-block right">
-        <span class="dateBtn" @click="addMonth()">&gt;</span>
-        <span class="dateBtn" @click="addYear()">&raquo;</span>
+        <span class="dateBtn" @click="addMonth()">></span>
+        <span class="dateBtn" @click="addYear()">>></span>
       </div>
       <div class="date-block">
         <span>
@@ -68,7 +68,7 @@ export default {
       </div>
       <div class="date-list">
         <span v-for="(item,index) of previousMonth" class="lastMonth">{{item}}</span>
-        <span v-for="(item,index) of monthDay[month - 1]" :class="{active:currIndex==index}" @click="selectDay($event,index)" class="nowMonth">{{item}}</span>
+        <span v-for="(item,index) of monthDay[month - 1]" :class="[{nowData:nowData==index },{active:currIndex===index}]" @click="selectDay($event,index)" class="nowMonth">{{item}}</span>
         <span v-for="(item,index) of nextMonth" class="nextMonth">{{item}}</span>
       </div>
     </div>
@@ -90,6 +90,7 @@ export default {
       nextMonth: [],
       // 当前被点击索引
       currIndex: '',
+      nowData: new Date().getDate() - 1,
     }
   },
   created() {
@@ -149,8 +150,26 @@ export default {
     addYear() {
       this.year++
     },
+    // 判断是否是当前月
+    if_nowData() {
+      if (this.year == new Date().getFullYear() && this.month == new Date().getMonth() + 1) {
+        this.nowData = new Date().getDate() - 1
+      } else {
+        this.nowData = null
+      }
+    },
+    // 判断是否是闰年
+    if_leapYear() {
+      if (((this.year % 4) == 0) && ((this.year % 100) != 0) || ((this.year % 400) == 0)) {
+        this.monthDay[1] = 29
+      } else {
+        this.monthDay[1] = 28
+      }
+    },
     // 日期显示
     dayScreen() {
+      this.if_nowData();
+      this.if_leapYear();
       // 上一个月
       let firstDate = new Date(this.year, this.month - 1, 1),
         // 获取上个月的第一天是周几
@@ -176,9 +195,9 @@ export default {
         this.previousMonth = this.previousMonth.slice(-firstWeek);
       }
       // 下一个月
-      let endDate = new Date(this.year, this.month + 1, this.monthDay[this.month + 1]),
-       endWeek = endDate.getDay(),
-       nextMonthDay = null;
+      let endDate = new Date(this.year, this.month + 1, this.monthDay[this.month + 1]);
+      let endWeek = endDate.getDay();
+      let nextMonthDay = null;
       if (this.month == 12) {
         nextMonthDay = this.monthDay[0];
       } else {
@@ -193,31 +212,38 @@ export default {
         this.nextMonth = this.nextMonth.slice(0, 6 - endWeek);
       }
     },
-    //格式化日期
+    //格式化日期：yyyy-MM-dd
     formatDate(date) {
-      let d = new Date(date),
-        month = '' + (d.getMonth() + 1),
-        day = '' + d.getDate(),
-        year = d.getFullYear();
-      if (month.length < 2) month = `0${month}`;
-      if (day.length < 2) day = `0${day}`;
-      return [year, month, day].join('-');
-    }
+      let myyear = date.getFullYear();
+      let mymonth = date.getMonth() + 1;
+      let myweekday = date.getDate();
+      if (mymonth < 10) {
+        mymonth = `0${mymonth}`;
+      }
+      if (myweekday < 10) {
+        myweekday = `0${myweekday}`;
+      }
+      return (myyear + "-" + mymonth + "-" + myweekday);
+    },
   },
-
   computed: {
   }
 }
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .main {
   background: rgba(0, 0, 0, 0.4);
-  border-color: rgba(0, 0, 0, 0.2);
+  /* border-color: rgba(0, 0, 0, 0.2); */
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, .2);
   width: 260px;
   padding: 2px;
   line-height: 18px;
+  user-select: none;
 }
+
 .main .header {
   position: relative;
   border: 0;
@@ -227,12 +253,15 @@ export default {
   color: #676767;
   border-bottom: 1px solid rgba(0, 0, 0, 0.6);
 }
+
 .main .header .btn-block {
   display: inline-block;
   width: auto;
+  /* user-select: none; */
 }
+
 .main .header .btn-block .dateBtn {
-  color: #fff;
+  color: #b57878;
   text-decoration: none;
   vertical-align: top;
   cursor: pointer;
@@ -242,44 +271,101 @@ export default {
   width: 14px;
   height: 14px;
 }
+
 .main .header .btn-block .dateBtn:hover {
   color: #FF9600 !important;
 }
+
 .main .header .date-block {
   text-align: center;
   padding: 0;
 }
+
 .main .header .date-block span {
   font-size: 16px;
   vertical-align: top;
 }
-.main .header .date-block span b:hover {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 上面时间栏的样式 */
+
+
+/* .main .header .date-block span b:hover {
   cursor: pointer;
   color: #fff !important;
   background-color: rgba(255, 255, 225, 0.15);
-}
+} */
+
 .main .dateContent {
   width: 100%;
 }
+
 .main .dateContent .weekContent {
   width: 100%;
 }
+
 .main .dateContent .date-list {
   font-size: 0;
 }
-.main .dateContent .date-list .nowMonth:hover {
-  border-radius: 50%;
+
+
+.main .dateContent .date-list .nowMonth.nowData {
+  position: relative;
 }
+
+.main .dateContent .date-list .nowMonth.nowData::after {
+  content: "";
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #2d8cf0;
+  position: absolute;
+  top: 4px;
+  right: 4px;
+}
+
+
 .main .dateContent .date-list .nowMonth.active,
 .main .dateContent .date-list .nowMonth:hover {
-  background-color: rgba(255, 255, 255, 0.35);
+  background-color: #2d8cf0;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  color: #fff;
+  border-radius: 4px;
   cursor: pointer;
 }
+
 .main .dateContent .date-list .lastMonth,
 .main .dateContent .date-list .nextMonth {
-  color: #54686B;
+  color: #80a9af;
 }
+
 .main .dateContent span {
   display: inline-block;
   width: 36px;
@@ -288,13 +374,16 @@ export default {
   line-height: 36px;
   font-size: 14px;
 }
+
 .left {
   float: left;
 }
+
 .right {
   float: right;
 }
 </style>
+
 
 ```
 
