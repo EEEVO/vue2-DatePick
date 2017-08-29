@@ -10,7 +10,7 @@
 
 ## Usage
 
-![例子样式](https://github.com/HeavenZhangHr/vue2-DataPick/blob/master/img.png)
+![例子样式](https://raw.githubusercontent.com/HeavenZhangHr/vue2-DatePick/master/image.png)
 
 ``` bash
 
